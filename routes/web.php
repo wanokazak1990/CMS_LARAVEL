@@ -323,3 +323,7 @@ Route::post('/filesadd', 			'FileController@put')			->name('filesadd');
 Route::get('/filesedit/{id}', 		'FileController@edit')			->name('filesedit');
 
 Route::post('/filesedit/{id}', 		'FileController@update')		->name('filesedit');
+
+Route::get('/filesdel/{id}',		'FileController@delete')		->name('filesdelete');
+
+Route::delete('/filesdel/{id}',		'FileController@destroy')		->name('filesdelete');

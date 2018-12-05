@@ -19,8 +19,8 @@ class FileController extends Controller
     		->with('title', 'Список файлов')
     		->with(['addTitle'=>'Новый файл','route'=>'filesadd'])
     		->with('list', $list)
-    		->with('edit', 'filesedit');
-    		//->with('delete', 'typesdelete');
+    		->with('edit', 'filesedit')
+    		->with('delete', 'filesdelete');
     }
 
     public function add()
@@ -95,11 +95,20 @@ class FileController extends Controller
 
     public function delete($id)
     {
+        $file = new file();
+        $file = $file->find($id);
 
+        return view('files.del')
+            ->with('title', 'Удаление файла')
+            ->with('file', $file);
     }
 
     public function destroy($id)
     {
-
+        if(isset($_POST['delete']))
+        {
+            file::destroy($id);
+        }
+        return redirect()->route('fileslist');
     }
 }
