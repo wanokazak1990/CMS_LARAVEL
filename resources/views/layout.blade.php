@@ -49,8 +49,8 @@
 				<li><a href="{{ route('typemodellist') }}">Список типов автомобилей</a></li>
 				<li><a href="{{ route('modellist') }}">Список моделей</a></li>
 				<h4>Файлы моделей</h4>
-				<li><a href="">Список типов файлов</a></li>
-				<li><a href="">Список файлов</a></li>
+				<li><a href="{{ route('typeslist')}}">Список типов файлов</a></li>
+				<li><a href="{{ route('fileslist')}}">Список файлов</a></li>
 				<h4>Цветовая палитра</h4>
 				<li><a href="{{ route('colorlist') }}">Список цветов</a></li>
 				<h4>Основное и доп. оборудование</h4>
