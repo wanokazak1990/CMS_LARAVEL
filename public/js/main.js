@@ -8,7 +8,7 @@ $('input[type="range"]').each(function(){
 	setRange($(this));
 })
 
-$('input[type="range"]').mousemove(function(){
+$('body').on('mousemove','input[type="range"]',function(){
 	setRange($(this));
 })
 function setRange(range)
@@ -418,9 +418,61 @@ switch (url[1])
 	break;
 
 	case 'companyadd':
-		$('select[name="brand_id"]').change(function(){
-			getModels($(this),'string'); 
+		$('select[name="scenario"]').change(function(){
+			$('.data').html("");
+			if($(this).val()==1)
+			{
+				str = '<div class="col-sm-2">';
+					str += '<label>';
+						str += '<input type="checkbox" value="1" name="base">';
+						str += 'Включить на базу';
+					str += '</label>';
+
+					str += '<label>';
+						str += '<input type="checkbox" value="1" name="option">';
+						str += 'Включить на опции';
+					str += '</label>';
+
+					str += '<label>';
+						str += '<input type="checkbox" value="1" name="dop">';
+						str += 'Включить на допы';
+					str += '</label>';
+				str += '</div>';
+
+				str += '<div class="col-sm-2">';
+					str += '<label>Значение(%):</label>';
+					str += '<input type="range" name="value" min="0" max="100" step="0.5" class="form-control">';
+				str += '</div>';
+
+				str += '<div class="col-sm-2">';
+					str += '<label>Ограничение скидки:</label>';
+					str += '<input type="text" name="max" class="form-control">';
+				str += '</div>';
+
+				$('.data').html(str);
+				var list = $('.data').find('input[name="value"]');
+				setRange(list);
+			}
+			if($(this).val()==2)
+			{
+				str = '<div class="col-sm-2">';
+					str += '<label>Сумма:</label>';
+					str += '<input type="text" name="bydget" class="form-control">';
+				str += '</div>';
+				$('.data').html(str);
+			}
+			if($(this).val()==3)
+			{
+				str = '<div class="col-sm-2">';
+					str += '<label>ДО:</label>';
+					str += '<button type="button" class="open-dop form-control">Выбрать ДО</button>';
+				str += '</div>';
+				$('.data').html(str);
+			}
 		});
+		$('body').on('click','.data button',function(){
+			alert(1)
+		})
 	break;
 
 	default:
