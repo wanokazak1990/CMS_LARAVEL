@@ -295,3 +295,31 @@ Route::post('/companyedit/{id}',	'CompanyController@update')		->name('companyedi
 Route::get('/companydel/{id}',		'CompanyController@delete')		->name('companydelete');
 
 Route::delete('/companydel/{id}',	'CompanyController@destroy')	->name('companydelete');
+
+/* РОУТЫ ТИПОВ ФАЙЛОВ */
+
+Route::get('/typeslist',			'FileTypeController@list')		->name('typeslist');
+
+Route::get('/typesadd',				'FileTypeController@add')		->name('typesadd');
+
+Route::post('/typesadd',			'FileTypeController@put')		->name('typesadd');
+
+Route::get('/typesedit/{id}',		'FileTypeController@edit')		->name('typesedit');
+
+Route::post('/typesedit/{id}',		'FileTypeController@update')	->name('typesedit');
+
+Route::get('/typesdel/{id}',		'FileTypeController@delete')	->name('typesdelete');
+
+Route::delete('/typesdel/{id}',		'FileTypeController@destroy')	->name('typesdelete');
+
+/* РОУТЫ ФАЙЛОВ*/
+
+Route::get('/fileslist',			'FileController@list')			->name('fileslist');
+
+Route::get('/filesadd', 			'FileController@add')			->name('filesadd');
+
+Route::post('/filesadd', 			'FileController@put')			->name('filesadd');
+
+Route::get('/filesedit/{id}', 		'FileController@edit')			->name('filesedit');
+
+Route::post('/filesedit/{id}', 		'FileController@update')		->name('filesedit');
