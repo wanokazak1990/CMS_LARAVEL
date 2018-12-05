@@ -400,6 +400,23 @@ switch (url[1])
 		});
 	break;
 
+	case 'filesadd':
+		$('select[name="brand_id"]').change(function(){
+			getModels($(this),'list'); 
+		});
+	break;
+
+	case 'filesedit':
+		var last_brand = $('select[name="brand_id"]').val();
+		$('select[name="brand_id"]').change(function(){
+			var res = confirm('При смене бренда удалится модель, которая выбрана для данного фаила, продолжить?');
+			if(res)
+				getModels($(this),'list'); 
+			else
+				$(this).val(last_brand);
+		});
+	break;
+
 	case 'companyadd':
 		$('select[name="brand_id"]').change(function(){
 			getModels($(this),'string'); 
