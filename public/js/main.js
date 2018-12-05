@@ -402,7 +402,7 @@ switch (url[1])
 
 	case 'companyadd':
 		$('select[name="brand_id"]').change(function(){
-			getModels($(this),'string');
+			getModels($(this),'string'); 
 		});
 	break;
 
