@@ -327,3 +327,19 @@ Route::post('/filesedit/{id}', 		'FileController@update')		->name('filesedit');
 Route::get('/filesdel/{id}',		'FileController@delete')		->name('filesdelete');
 
 Route::delete('/filesdel/{id}',		'FileController@destroy')		->name('filesdelete');
+
+/* РОУТЫ ХАРАКТЕРИСТИК */
+
+Route::get('/characterlist', 			'CharacterController@list')		->name('characterlist');
+
+Route::get('/characteradd', 			'CharacterController@add')		->name('characteradd');
+
+Route::post('/characteradd', 			'CharacterController@put')		->name('characteradd');
+
+Route::get('/characteredit/{id}', 		'CharacterController@edit')		->name('characteredit');
+
+Route::post('/characteredit/{id}', 		'CharacterController@update')	->name('characteredit');
+
+Route::get('/characterdel/{id}',		'CharacterController@delete')		->name('characterdel');
+
+Route::delete('/characterdel/{id}',		'CharacterController@destroy')		->name('characterdel');

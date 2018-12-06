@@ -94,6 +94,28 @@
 			@endforeach
 			</div>
 		</div>
+
+		<div class="row">
+			<div class="col-sm-6">
+			<h3>Характеристики</h3>
+			@foreach($characters as $key => $character)
+				<input type="text" name="char[ {{ $key }} ]" class="form-control" placeholder="{{ $character }}" title="{{ $character }}" 
+				value="<?php 
+				if (isset($model_characters))
+				{
+					foreach ($model_characters as $char) 
+					{
+						if ($key == $char->character_id)
+						{
+							echo $char->value;
+						}
+					}
+				}
+				?>">
+			@endforeach
+			</div>
+		</div>
+
 	</div>
 
 	<div style="clear: left;">
