@@ -24,7 +24,7 @@
 				overflow: hidden;
 				white-space: nowrap;
 			}
-			.color label,.option label,.dop label{font-weight: normal;}
+			.color label,.option label,.dop label{font-weight: normal;width: 100%;}
 			.color label:hover,.option label:hover,.dop label:hover{}
 			.option input,.dop input {margin-right: 15px !important;display: inline-block;}
 			tr:hover{background: #eee;}
@@ -32,6 +32,8 @@
 			.font-16{font-size: 16px;}
 			.font-14{font-size: 14px;}
 			.font-12{font-size: 12px;}
+			.exep div {padding: 0;}
+			.company-dop{display:none;position: absolute;top: 50px;left: 5%;width: 90%;min-height: 90vh;background: #eee;z-index: 100;box-shadow: 0 0 15px #000;border-radius:5px;}
 		</style>
 	</head>
 

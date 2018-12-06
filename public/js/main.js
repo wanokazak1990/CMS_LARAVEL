@@ -295,7 +295,10 @@ function getComplects(elem)
 /////////////////////////////////////////////////////////////////////
 
 switch (url[1])
-{
+{	
+	////////////////////
+	//СОЗДАНИЕ МОДЕЛЕЙ//
+	////////////////////
 	case 'modeladd':
 		$('select[name="brand_id"]').change(function(){
 			getColor($(this));
@@ -318,6 +321,9 @@ switch (url[1])
 		});
 	break;
 
+	//////////////////////////
+	//СОЗДАНИЕ ПАКЕТОВ ОПЦИЙ//
+	//////////////////////////
 	case 'packadd':
 		$('select[name="brand_id"]').change(function(){
 			getOption($(this));
@@ -341,6 +347,9 @@ switch (url[1])
 		});
 	break;
 
+	/////////////////////////
+	//СОЗДАНИЕ КОМПЛЕКТАЦИЙ//
+	/////////////////////////
 	case 'complectadd':
 		$('select[name="brand_id"]').change(function(){
 			getModels($(this),'list');
@@ -353,6 +362,9 @@ switch (url[1])
 		});
 	break;
 
+	///////////////////////
+	//СОЗДАНИЕ АВТОМОБИЛЯ//
+	///////////////////////
 	case 'caradd':
 		$('select[name="brand_id"]').change(function(){
 			getModels($(this),'list');
@@ -379,6 +391,9 @@ switch (url[1])
 		});
 	break;
 
+	///////////////////////////////
+	//СОЗДАНИЕ КРЕДИТНЫХ ПРОГРАММ//
+	///////////////////////////////
 	case 'kreditadd':
 		$('select[name="brand_id"]').change(function(){
 			getModels($(this),'string');
@@ -400,6 +415,9 @@ switch (url[1])
 		});
 	break;
 
+	//////////////////////////////////////
+	//ДОБАВЛЕНИЕ ФАИЛОВ (PDF) ДЛЯ МОДЕЛИ//
+	//////////////////////////////////////
 	case 'filesadd':
 		$('select[name="brand_id"]').change(function(){
 			getModels($(this),'list'); 
@@ -417,9 +435,14 @@ switch (url[1])
 		});
 	break;
 
+	//////////////////////////////////
+	//СОЗДАНИЕ КОММЕРЧЕСКОЙ КОМПАНИИ//
+	//////////////////////////////////
 	case 'companyadd':
+		//изменение сценария очистить блок data и добавит поля для выбранного сценария
 		$('select[name="scenario"]').change(function(){
 			$('.data').html("");
+			$(".company-dop input").prop('checked', false);
 			if($(this).val()==1)
 			{
 				str = '<div class="col-sm-2">';
@@ -470,8 +493,36 @@ switch (url[1])
 				$('.data').html(str);
 			}
 		});
+		//выбор модели подгрузит комплектации для этой модели
+		$('body').on('change','select[name="model_id"]',function(){
+			getComplects($(this));
+		})
 		$('body').on('click','.data button',function(){
-			alert(1)
+			$(".company-dop").css('display','block');
+		});
+		$('body').on('click','.close',function(){
+			$(".company-dop").css('display','none');
+		});
+		//клонировать родителя кнопки включения/исключения
+		var i = 100;
+		$('body').on('click','.clone',function(){
+			var parent = $(this).closest('.pos_exeptions');
+			var clonest = $(this).closest('.exep').clone();
+			clonest.find('label').html("");
+			clonest.find('input[type="text"]').val("");
+			clonest.find('input, select').each(function(){
+				var name = $(this).attr('name');
+				name = name.replace(/\[(.*?)\]/g, '['+i+']');
+				$(this).attr('name',name)
+			});
+			i++
+			parent.append(clonest);
+		})
+		//удаление родителя кнопки включения/исключения
+		$('body').on('click','.delete',function(){
+			var count = $(this).closest('.pos_exeptions').find('.exep').length;
+			if(count>=2)
+				$(this).closest('.exep').remove();
 		})
 	break;
 

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class company extends Model
 {
     //
+    protected $fillable = ['day_in','day_out','status','timer','razdel','name','scenario','base','option','dop','value','max','valute','bydget','file','title','text','ofer','main','immortal'];
 
     public function getRazdels()
     {
