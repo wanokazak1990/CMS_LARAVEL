@@ -5,7 +5,7 @@
 @section('right')
 	<a href="{{ route($route) }}">{{ $addTitle }}</a>
 	<table class="table">
-	@foreach ($list as $key=>$item)
+	@foreach ($list as $key=>$item) 
 		<tr>
 			<td>{{$key+1}}</td>
 	    	<td>{{ $item->name }}</td>

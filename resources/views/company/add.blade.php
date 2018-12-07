@@ -248,7 +248,7 @@
 		</div>
 
 		<div class='pos_exeptions'>
-			<div class="col-sm-12"><h4>Исключение:</h4></div>
+			<div class="col-sm-12"><h4>Исключение: </h4></div>
 			@isset($company->exception)
 				<?php $i=0;?>
 				@foreach($company->exception as $key=>$excep)
