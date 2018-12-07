@@ -14,8 +14,7 @@
 				@endisset
 			</td>
 			<td>
-				<div style="border:1px solid #ccc;width: 100px;height: 30px;background: {{$color->web_code}}">
-				</div>
+				{{$color->getColorIcon()}}
 			</td>
 			<td><a href="{{ route($edit,['id'=>$color->id]) }}">Изменить</a>
 			<td><a href="{{ route($delete,['id'=>$color->id]) }}">Удалить</a>

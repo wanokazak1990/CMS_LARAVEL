@@ -9,6 +9,16 @@ class company extends Model
     //
     protected $fillable = ['day_in','day_out','status','timer','razdel','name','scenario','base','option','dop','value','max','valute','bydget','file','title','text','ofer','main','immortal'];
 
+    public function exception()
+    {
+    	return $this->hasMany('App\company_data','company_id','id');
+    }
+
+    public function dops()
+    {
+    	return $this->hasMany('App\company_dop','company_id','id');
+    }
+
     public function getRazdels()
     {
     	$mas[1] = 'Скидка';

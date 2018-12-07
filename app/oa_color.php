@@ -16,4 +16,23 @@ class oa_color extends Model
     	if($res)
     		return $res;
     }
+
+    public function getColorIcon()
+    {
+    	$mas = explode(',', $this->web_code);
+    	if(count($mas)>1)
+    		return '<div style="
+    					border:1px solid #ccc; 
+    					width: 30px; 
+    					height: 30px; 
+    					background: linear-gradient(0%, '.$mas[0].', 50%, '.$mas[1].')">
+				</div>';
+		else 
+			return '<div style="
+    					border:1px solid #ccc; 
+    					width: 30px; 
+    					height: 30px; 
+    					background: '.$this->web_code.'">
+				</div>';		
+    }
 }

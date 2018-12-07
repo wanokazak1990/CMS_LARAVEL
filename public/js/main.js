@@ -256,8 +256,8 @@ function getPacks(elem)
 	})
 }
 
-function getComplects(elem)
-{
+function getComplects(elem,pastle=0)
+{	log(pastle)
 	var model_id = elem.val();
 	$.ajax({
 		type: "GET",
@@ -265,7 +265,8 @@ function getComplects(elem)
 		data: {'model_id':model_id},
 		success: function(param){
 			var objs = JSON.parse(param);
-			$('.complect').html('');
+			if(pastle==0) $('.complect').html('');
+			else pastle.html("");
 			var str = '';
 			str += '<option selected disabled>Укажите параметр</option>';
 			objs.forEach(function(obj,i){
@@ -273,7 +274,8 @@ function getComplects(elem)
 					str += obj.fullname;
 				str += '</option>';
 			});
-			$('.complect').html(str);
+			if(pastle==0) $('.complect').html(str);
+			else pastle.html(str);
 		},
 		error: function(param)
 		{
@@ -445,7 +447,8 @@ switch (url[1])
 			$(".company-dop input").prop('checked', false);
 			if($(this).val()==1)
 			{
-				str = '<div class="col-sm-2">';
+				str = '<div class="col-sm-12"><h4>Параметры расчёта</h4></div>';
+				str += '<div class="col-sm-2">';
 					str += '<label>';
 						str += '<input type="checkbox" value="1" name="base">';
 						str += 'Включить на базу';
@@ -478,7 +481,8 @@ switch (url[1])
 			}
 			if($(this).val()==2)
 			{
-				str = '<div class="col-sm-2">';
+				str = '<div class="col-sm-12"><h4>Параметры бюджета</h4></div>';
+				str += '<div class="col-sm-2">';
 					str += '<label>Сумма:</label>';
 					str += '<input type="text" name="bydget" class="form-control">';
 				str += '</div>';
@@ -486,7 +490,8 @@ switch (url[1])
 			}
 			if($(this).val()==3)
 			{
-				str = '<div class="col-sm-2">';
+				str = '<div class="col-sm-12"><h4>Параметры номенклатуры</h4></div>';
+				str += '<div class="col-sm-2">';
 					str += '<label>ДО:</label>';
 					str += '<button type="button" class="open-dop form-control">Выбрать ДО</button>';
 				str += '</div>';
@@ -494,8 +499,8 @@ switch (url[1])
 			}
 		});
 		//выбор модели подгрузит комплектации для этой модели
-		$('body').on('change','select[name="model_id"]',function(){
-			getComplects($(this));
+		$('body').on('change','.model',function(){
+			getComplects($(this),$(this).closest('.exep').find('.complect'));
 		})
 		$('body').on('click','.data button',function(){
 			$(".company-dop").css('display','block');
@@ -510,6 +515,101 @@ switch (url[1])
 			var clonest = $(this).closest('.exep').clone();
 			clonest.find('label').html("");
 			clonest.find('input[type="text"]').val("");
+			clonest.find('.complect').html("");
+			clonest.find('.clone').css('display','none');
+			clonest.find('input, select').each(function(){
+				var name = $(this).attr('name');
+				name = name.replace(/\[(.*?)\]/g, '['+i+']');
+				$(this).attr('name',name)
+			});
+			i++
+			parent.append(clonest);
+		})
+		//удаление родителя кнопки включения/исключения
+		$('body').on('click','.delete',function(){
+			var count = $(this).closest('.pos_exeptions').find('.exep').length;
+			if(count>=2)
+				$(this).closest('.exep').remove();
+		})
+	break;
+
+	case 'companyedit':
+		//изменение сценария очистить блок data и добавит поля для выбранного сценария
+		$('select[name="scenario"]').change(function(){
+			$('.data').html("");
+			$(".company-dop input").prop('checked', false);
+			if($(this).val()==1)
+			{
+				str = '<div class="col-sm-12"><h4>Параметры расчёта</h4></div>';
+				str += '<div class="col-sm-2">';
+					str += '<label>';
+						str += '<input type="checkbox" value="1" name="base">';
+						str += 'Включить на базу';
+					str += '</label>';
+
+					str += '<label>';
+						str += '<input type="checkbox" value="1" name="option">';
+						str += 'Включить на опции';
+					str += '</label>';
+
+					str += '<label>';
+						str += '<input type="checkbox" value="1" name="dop">';
+						str += 'Включить на допы';
+					str += '</label>';
+				str += '</div>';
+
+				str += '<div class="col-sm-2">';
+					str += '<label>Значение(%):</label>';
+					str += '<input type="range" name="value" min="0" max="100" step="0.5" class="form-control">';
+				str += '</div>';
+
+				str += '<div class="col-sm-2">';
+					str += '<label>Ограничение скидки:</label>';
+					str += '<input type="text" name="max" class="form-control">';
+				str += '</div>';
+
+				$('.data').html(str);
+				var list = $('.data').find('input[name="value"]');
+				setRange(list);
+			}
+			if($(this).val()==2)
+			{
+				str = '<div class="col-sm-12"><h4>Параметры бюджета</h4></div>';
+				str += '<div class="col-sm-2">';
+					str += '<label>Сумма:</label>';
+					str += '<input type="text" name="bydget" class="form-control">';
+				str += '</div>';
+				$('.data').html(str);
+			}
+			if($(this).val()==3)
+			{
+				str = '<div class="col-sm-12"><h4>Параметры номенклатуры</h4></div>';
+				str += '<div class="col-sm-2">';
+					str += '<label>ДО:</label>';
+					str += '<button type="button" class="open-dop form-control">Выбрать ДО</button>';
+				str += '</div>';
+				$('.data').html(str);
+			}
+		});
+		//выбор модели подгрузит комплектации для этой модели
+		$('body').on('change','.model',function(){
+			getComplects($(this),$(this).closest('.exep').find('.complect'));
+		})
+		$('body').on('click','.data button',function(){
+			$(".company-dop").css('display','block');
+		});
+		$('body').on('click','.close',function(){
+			$(".company-dop").css('display','none');
+		});
+		//клонировать родителя кнопки включения/исключения
+		var i = 100;
+		$('body').on('click','.clone',function(){
+			var parent = $(this).closest('.pos_exeptions');
+			var clonest = $(this).closest('.exep').clone();
+			clonest.find('label').html("");
+			clonest.find('input[type="text"]').val("");
+			clonest.find('.complect').html("");
+			clonest.find('.clone').css('display','none');
 			clonest.find('input, select').each(function(){
 				var name = $(this).attr('name');
 				name = name.replace(/\[(.*?)\]/g, '['+i+']');

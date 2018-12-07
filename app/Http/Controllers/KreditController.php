@@ -18,12 +18,6 @@ class KreditController extends Controller
     	{
     		$kredit->model->load('model');
     	}
-    	foreach ($list as $key => $value) {
-    		foreach($value->model as $k_model)
-    		{
-    			//dump($k_model->model_id);
-    		}	
-    	}
     	return view('kredit.list')
     		->with('title','Список кредитов')
     		->with('list',$list)

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\oa_complect;
 
 class company_data extends Model
 {
@@ -17,5 +18,21 @@ class company_data extends Model
     				return 1;
     	}
     	return 0;
+    }
+
+    public function complect()
+    {
+        return $this->hasMany('App\oa_complect','model_id','model_id');
+    }
+
+    public function getComplect($mas= array())
+    {
+        $res = $this->complect;
+        
+        foreach ($res as $key => $complect) {
+            if($complect->motor)
+                $mas[$complect->id] = $complect->name.' '.$complect->motor->nameForSelect()['name'] ;
+        }
+        return $mas;
     }
 }
