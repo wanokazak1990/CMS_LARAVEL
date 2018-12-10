@@ -9,29 +9,29 @@
 		<h3>Основные данные модели</h3>
 
 		{!! Form::label('title', 'Бренд: *') !!}
-			{!! Form::select('brand_id',$brands,$model->brand_id, ['class' => 'form-control','required'=>'required']) !!}
+			{!! Form::select('brand_id',$brands,$model->brand_id, ['class' => 'form-control']) !!}
 		<br>
 		{!! Form::label('title', 'Тип авто: *') !!}
-			{!! Form::select('type_id',$types,$model->type_id, ['class' => 'form-control','required'=>'required']) !!}
+			{!! Form::select('type_id',$types,$model->type_id, ['class' => 'form-control']) !!}
 		<br>
 		{!! Form::label('title', 'Производство: *') !!}
-			{!! Form::select('country_id',$countrys,$model->country_id, ['class' => 'form-control','required'=>'required']) !!}
+			{!! Form::select('country_id',$countrys,$model->country_id, ['class' => 'form-control']) !!}
 		<br>
 		{!! Form::label('title', 'Название: *') !!}
-			{!! Form::text('name', $model->name, ['class' => 'form-control','required'=>'required']) !!}
+			{!! Form::text('name', $model->name, ['class' => 'form-control']) !!}
 		<br>
 		{!! Form::label('title','Префикс:') !!}
 			{!! Form::text('label',$model->label, ['class' => 'form-control']) !!}
 		<br>
 		{!! Form::label('title', 'Ссылка: *') !!}
-			{!! Form::text('link', $model->link, ['class' => 'form-control','required'=>'required']) !!}
+			{!! Form::text('link', $model->link, ['class' => 'form-control']) !!}
 		<br>
 		
 		{!! Form::label('title','Слоган: *') !!}
-			{!! Form::text('slogan',$model->slogan, ['class' => 'form-control','required'=>'required']) !!}
+			{!! Form::text('slogan',$model->slogan, ['class' => 'form-control']) !!}
 		<br>
 		{!! Form::label('title','Описание: *') !!}
-			{!! Form::textarea('text',$model->text,['class' => 'form-control','required'=>'required']) !!}
+			{!! Form::textarea('text',$model->text,['class' => 'form-control']) !!}
 	</div>
 
 	<div class="col-sm-8">

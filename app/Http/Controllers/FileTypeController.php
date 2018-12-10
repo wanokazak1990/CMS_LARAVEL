@@ -86,7 +86,9 @@ class FileTypeController extends Controller
     {
     	if(isset($_POST['delete']))
 		{
-			file_type::destroy($id);
+			$file_type = file_type::find($id);
+            @unlink(storage_path('/app/public/images/file_types/'.$file_type->icon));
+            file_type::destroy($id);
 		}
     	return redirect()->route('typeslist');
     }

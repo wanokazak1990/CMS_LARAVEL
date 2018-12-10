@@ -10,14 +10,16 @@ class file extends Model
     	'type_id',
     	'name',
     	'file',
-    	'model_id'
+    	'model_id',
+        'brand_id'
     ];
 
     protected $attributes = [
     	'type_id' => 0,
     	'name' => '0',
     	'file' => '0',
-    	'model_id' => 0
+    	'model_id' => 0,
+        'brand_id' => 0
     ];
     
     public $timestamps = false;

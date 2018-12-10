@@ -44,7 +44,8 @@ class FileController extends Controller
     		{
     			$loadfile = $request->file('file'); // а вот это загружаемый!!
     			$destinationPath = storage_path().'/app/public/model_docs/'; // Путь, куда загрузим файл
-    			$filename = $loadfile->getClientOriginalName(); // В "file" файла запишем название файла
+    			$prefix = str_random(8);
+                $filename = $prefix.'_'.$loadfile->getClientOriginalName(); // В "file" файла запишем название файла
     			$file->file = $filename;
     			$request->file('file')->move($destinationPath, $filename);
     		}
@@ -58,14 +59,16 @@ class FileController extends Controller
     	$file = new file();
     	$file = $file->find($id);
 
-    	$oa_model = oa_model::pluck('name','id');
+    	$oa_model = oa_model::where('brand_id', $file->brand_id)->pluck('name','id');
     	$file_type = file_type::pluck('name','id');
+        $brands = oa_brand::pluck('name','id');
 
     	return view('files.edit')
     		->with('title', 'Редактирование файла')
     		->with('file', $file)
     		->with('models', $oa_model)
-    		->with('types', $file_type);
+    		->with('types', $file_type)
+            ->with('brands',$brands);
     }
 
     public function update(Request $request, $id)
@@ -77,14 +80,16 @@ class FileController extends Controller
 	    	$file->name = $_POST['name'];
 	    	$file->type_id = $_POST['type_id'];
 	    	$file->model_id = $_POST['model_id'];
+            $file->brand_id = $_POST['brand_id'];
 	    	if ($request->hasFile('file'))
     		{
     			$loadfile = $request->file('file'); 
     			$destinationPath = storage_path().'/app/public/model_docs/'; // Путь, куда загрузим файл
+                $prefix = substr($file->file, 0, 8);
     			
-    			unlink(storage_path('/app/public/model_docs/'.$file->file)); // Удаляем предыдущий файл, который относился к текущей записи
+    			@unlink(storage_path('/app/public/model_docs/'.$file->file)); // Удаляем предыдущий файл, который относился к текущей записи
 
-    			$filename = $loadfile->getClientOriginalName(); // В "file" файла запишем название НОВОГО файла
+    			$filename = $prefix.'_'.$loadfile->getClientOriginalName(); // В "file" файла запишем название НОВОГО файла
     			$file->file = $filename;
     			$request->file('file')->move($destinationPath, $filename);
     		}
@@ -107,6 +112,8 @@ class FileController extends Controller
     {
         if(isset($_POST['delete']))
         {
+            $file = file::find($id);
+            @unlink(storage_path('/app/public/model_docs/'.$file->file));
             file::destroy($id);
         }
         return redirect()->route('fileslist');

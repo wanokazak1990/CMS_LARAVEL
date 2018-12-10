@@ -54,7 +54,7 @@
 
 	                    <!-- Branding Image -->
 	                    <a class="navbar-brand" href="">
-	                        "ОВЕН-АВТО" система упралвения контентом
+	                        "ОВЕН-АВТО" система управления контентом
 	                    </a>
 	                </div>
 
@@ -102,7 +102,7 @@
 		<div class="col-sm-3 col-lg-2">
 			<div class="left-menu">
 			@section('left')
-			Добро пожаловать <b>{{ auth()->user()->name }}</b><br>
+			Добро пожаловать, <b>{{ auth()->user()->name }}</b><br>
 			<span style="color: #888">Это главное меню системы управления контентом сайта и складом автомобилей.</span>
 			<h3>Меню</h3>
 
