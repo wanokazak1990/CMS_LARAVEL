@@ -96,9 +96,11 @@
 		</div>
 
 		<div class="row">
-			<div class="col-sm-6">
+			<div class="col-sm-12">
 			<h3>Характеристики</h3>
 			@foreach($characters as $key => $character)
+			<div class="col-sm-6" style="padding-bottom: 10px;">
+			<label>{{ $character }}</label>
 				<input type="text" name="char[ {{ $key }} ]" class="form-control" placeholder="{{ $character }}" title="{{ $character }}" 
 				value="<?php 
 				if (isset($model_characters))
@@ -112,6 +114,7 @@
 					}
 				}
 				?>">
+			</div>
 			@endforeach
 			</div>
 		</div>

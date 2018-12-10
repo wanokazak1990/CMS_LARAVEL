@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta name="csrf-token" content="{{ csrf_token() }}">
@@ -40,7 +41,7 @@
 
 	<body>
 		<div id="app">
-	        <nav class="navbar navbar-default navbar-static-top">
+	        <nav class="navbar navbar-default navbar-fixed-top">
 	            <div class="container-fluid">
 	                <div class="navbar-header">
 
@@ -104,6 +105,7 @@
 			@section('left')
 			Добро пожаловать, <b>{{ auth()->user()->name }}</b><br>
 			<span style="color: #888">Это главное меню системы управления контентом сайта и складом автомобилей.</span>
+			<a href="{{ route('crm') }}" target="_blank">Перейти в CRM "Учет"</a>
 			<h3>Меню</h3>
 
 			<ul>

@@ -347,3 +347,7 @@ Route::delete('/characterdel/{id}',		'CharacterController@destroy')		->name('cha
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+/* CRM */
+
+Route::get('/crm', 'CRMMainController@main')->name('crm');
