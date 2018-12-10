@@ -142,6 +142,9 @@ class CompanyController extends Controller
     	);
     	if($request->has('submit')) ://если нажата создать
     		$company = company::with('exception','dops')->find($id);//вставляем в модель компании данные из формы
+            $company->base = 0;
+            $company->dop = 0;
+            $company->option = 0;
     		$mas = $request->input();
     		$mas['day_in'] = strtotime($mas['day_in']);
     		$mas['day_out'] = strtotime($mas['day_out']);
@@ -198,11 +201,20 @@ class CompanyController extends Controller
 
     public function delete($id)
     {
-    	echo "string";
+    	$company = company::find($id);
+        return view('company.del')
+            ->with('title','Удаление компании')
+            ->with('company',$company);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-    	echo "string";
+    	if($request->has('delete'))
+        {
+            company::destroy($id);
+            company_data::where('company_id',$id)->delete();
+            company_dop::where('company_id',$id)->delete();
+        }
+        return redirect()->route('companylist');
     }
 }

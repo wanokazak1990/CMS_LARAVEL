@@ -7,6 +7,7 @@ use App\ava_loc;
 
 class CarLocController extends Controller
 {
+    //
     public function list()
     {
     	$list = ava_loc::get();

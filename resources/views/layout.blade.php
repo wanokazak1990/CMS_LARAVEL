@@ -17,7 +17,7 @@
 			.delete-button{background: transparent;border: 0px;padding: 0px;color:#f44;}
 			.active-menu{color:#a55;}
 			.active-menu:hover{color: #a55;}
-			.left-menu{height: 100vh;overflow-y: scroll;position: fixed;top:0;left: 0; width: inherit;padding-left: 15px;background: #ddd}
+			.left-menu{height: 100vh;overflow-y: scroll;position: fixed;top:0;left: 0; width: inherit;padding-left: 15px;background: #ddd;padding-top: 50px;}
 			.left-menu ul{list-style-type: none;padding-left: 0px;}
 			.color div:hover,.option div:hover,.dop div:hover{background: #ff0;}
 			.color div,.option div,.dop div{
@@ -34,15 +34,78 @@
 			.font-12{font-size: 12px;}
 			.exep div {padding: 0;}
 			.company-dop{display:none;position: absolute;top: 50px;left: 5%;width: 90%;min-height: 90vh;background: #eee;z-index: 100;box-shadow: 0 0 15px #000;border-radius:5px;}
+			.navbar{background: #ddd !important;border: 0px !important;}
 		</style>
 	</head>
 
 	<body>
-		
+		<div id="app">
+	        <nav class="navbar navbar-default navbar-static-top">
+	            <div class="container-fluid">
+	                <div class="navbar-header">
+
+	                    <!-- Collapsed Hamburger -->
+	                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
+	                        <span class="sr-only">Toggle Navigation</span>
+	                        <span class="icon-bar"></span>
+	                        <span class="icon-bar"></span>
+	                        <span class="icon-bar"></span>
+	                    </button>
+
+	                    <!-- Branding Image -->
+	                    <a class="navbar-brand" href="">
+	                        "ОВЕН-АВТО" система упралвения контентом
+	                    </a>
+	                </div>
+
+	                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+	                    <!-- Left Side Of Navbar -->
+	                    <ul class="nav navbar-nav">
+	                        &nbsp;
+	                    </ul>
+
+	                    <!-- Right Side Of Navbar -->
+	                    <ul class="nav navbar-nav navbar-right">
+	                        <!-- Authentication Links -->
+	                        @guest
+	                            <li><a href="{{ route('login') }}">Login</a></li>
+	                            <li><a href="{{ route('register') }}">Register</a></li>
+	                        @else
+	                            <li class="dropdown">
+	                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+	                                    {{ Auth::user()->name }} <span class="caret"></span>
+	                                </a>
+
+	                                <ul class="dropdown-menu">
+	                                    <li>
+	                                        <a href="{{ route('logout') }}"
+	                                            onclick="event.preventDefault();
+	                                                     document.getElementById('logout-form').submit();">
+	                                            Logout
+	                                        </a>
+
+	                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+	                                            {{ csrf_field() }}
+	                                        </form>
+	                                    </li>
+	                                </ul>
+	                            </li>
+	                        @endguest
+	                    </ul>
+	                </div>
+	            </div>
+	        </nav>
+
+	        @yield('content')
+	    </div>
+
 		<div class="col-sm-3 col-lg-2">
 			<div class="left-menu">
 			@section('left')
+			Добро пожаловать <b>{{ auth()->user()->name }}</b><br>
+			<span style="color: #888">Это главное меню системы управления контентом сайта и складом автомобилей.</span>
 			<h3>Меню</h3>
+
 			<ul>
 				<h4>Общие</h4>
 				<li><a href="{{ route('brandlist') }}">Список брендов</a></li>
@@ -98,6 +161,6 @@
 		<script src="/js/jquery-ui.js"></script><!--http://api.jqueryui.com/datepicker/-->
 		<link href='/css/jquery-ui.css' rel='stylesheet' type='text/css'>
 		<script src="/js/calendar-ui.js"></script>
-
+		<!--script src="{{ asset('js/app.js') }}"></script-->
 	</body>
 </html>

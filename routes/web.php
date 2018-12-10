@@ -26,7 +26,7 @@ Route::get('/getmodels',		'AjaxController@getmodels')			->name('getmodels');
 
 Route::get('/getmotors',		'AjaxController@getmotors')			->name('getmotors');
 
-Route::post('/getpacks',			'AjaxController@getpacks')		->name('getpacks');
+Route::post('/getpacks',		'AjaxController@getpacks')		->name('getpacks');
 
 Route::get('/getcomplects',		'AjaxController@getcomplects')		->name('getcomplects');
 
@@ -343,3 +343,7 @@ Route::post('/characteredit/{id}', 		'CharacterController@update')	->name('chara
 Route::get('/characterdel/{id}',		'CharacterController@delete')		->name('characterdel');
 
 Route::delete('/characterdel/{id}',		'CharacterController@destroy')		->name('characterdel');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
